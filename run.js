@@ -1,6 +1,7 @@
 $(document).ready(function(event){
 	console.log("yo")
 	var base = new Firebase("https://philz4schoolz.firebaseio.com/")
+	displayRuns()
 	// base.once('value' function(snap){
 	// 	var 
 	// });
@@ -21,7 +22,23 @@ $(document).ready(function(event){
       		} 
       		else {
       			console.log("success");
+      			$(".form-input").val("");
       		}
 		});
-	})
+	});
+	function displayRuns(){
+		runBase = base.child("runs");
+		runBase.on('child_added', function(snapshot) {
+			var newRun = snapshot.val();
+			var runContainer = $('#run-container');
+			$('<li>', {id:snapshot.name(), }).html('<div class="r-location">' + newRun.location + '</div>' +
+				'<div class="r-maxOrders">' + newRun.maxorders + '</div>' +
+				'<div class="r-owner">' + newRun.owner + '</div>' +
+				'<div class="r-time">' + newRun.time + '</div>' 
+				).appendTo(runContainer);
+			var newRunRef = runBase.child(snapshot.name());
+			var id = newRunRef.name()
+			newRunRef.update({id: id});
+		});
+	};
 });
