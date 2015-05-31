@@ -122,6 +122,7 @@ $("#logout").click(function(){
 	};
 	var uid = null;
 	var base = null;
+	var friends = null;
 	var displayname = null;
 	var userprofile = null;
 	var accessToken = null;
@@ -141,7 +142,12 @@ FB.api('/me/friends', {
 	access_token: accessToken
 }, function(response){
 	console.log(response)
+	friends = response
 });
+friendsBase = base.child("friends")
+console.log(friends[0][id])
+// 	friendsBase.push(friends[0][id])
+// }
 //     FB.getLoginStatus(function(response) {
 //   if (response.status === 'connected') {
 //     FB.api('/me/friends', function(response){
