@@ -1,15 +1,47 @@
 $(document).ready(function(event){
 	var uid = null;
 	var base = null;
+	var displayname = null;
+	var userprofile = null;
 		var ref = new Firebase("https://philz4schoolz.firebaseio.com");
-		
+		ref.authWithOAuthPopup("facebook", function(error, authData) {
+  if (error) {
+    console.log("Login Failed!", error);
+  } else {
+    console.log("Authenticated successfully with payload:", authData);
+    uid = authData.uid
+    displayname = authData.facebook.displayName
+    userprofile = authData.facebook.cachedUserProfile
+    console.log(userprofile)
+    console.log(displayname)
+    displayInfo(uid)
+  }
+});
+function authDataCallback(authData) {
+  if (authData) {
+    console.log("User " + authData.uid + " is logged in with " + authData.provider);
+      
+
+
+//     		// var ref = new Firebase("https://philz4schoolz.firebaseio.com");
+// 	// ref.unauth()
+// console.log(accessToken)
+// FB.logout({access_token: accessToken}, function(response){
+// 	console.log("logged out")
+// })
+  } else {
+    console.log("User is logged out");
+  }
+}
+var ref = new Firebase("https://philz4schoolz.firebaseio.com");
+ref.onAuth(authDataCallback);
 
 	function displayInfo(uid){
 		uid = uid;
 		base = new Firebase("https://philz4schoolz.firebaseio.com/users/" + uid)
+		displayProfile();
 		displayRuns();
 	}
-	
 	
 	// base.once('value' function(snap){
 	// 	var 
@@ -35,6 +67,21 @@ $(document).ready(function(event){
       		}
 		});
 	});
+$("#logout").click(function(){
+console.log("meh")
+      	 //    FB.getLoginStatus(function(response) {
+        // if (response && response.status === 'connected') {
+            FB.logout(function(response) {
+            	console.log("yeh")
+                document.location.reload();
+            // });
+        }
+    });
+    })
+	function displayProfile(){
+		console.log(displayname)
+		$("#display-name").html(displayname)
+	}
 	function displayRuns(){
 		console.log(uid)
 	
@@ -50,7 +97,7 @@ $(document).ready(function(event){
 				'<div class="r-ppl-container"></div>'+
 				'<input type="text" class="person-name" class="form-input" placeholder="your name">' +
 				'<input type="text" class="drink-order" class="form-input" placeholder="your order">' +
-				'<h2>I want in on this run!</h2><button type="button" onclick="yah($(this).parent())">Yah!</button>'
+				'<button type="button" onclick="yah($(this).parent())">Yah!</button>'
 				).appendTo(runContainer);
 			var newRunRef = runBase.child(snapshot.key());
 			var id = newRunRef.key()
@@ -72,6 +119,9 @@ $(document).ready(function(event){
 
 	var uid = null;
 	var base = null;
+	var displayname = null;
+	var userprofile = null;
+	var accessToken = null;
 		var ref = new Firebase("https://philz4schoolz.firebaseio.com");
 		ref.authWithOAuthPopup("facebook", function(error, authData) {
   if (error) {
@@ -79,8 +129,43 @@ $(document).ready(function(event){
   } else {
     console.log("Authenticated successfully with payload:", authData);
     uid = authData.uid
-  }
+    displayname = authData.facebook.displayName
+    userprofile = authData.facebook.cachedUserProfile
+    accessToken = authData.facebook.accessToken
+
+FB.api('/me/friends', {
+	access_token: accessToken
+}, function(response){
+	console.log(response)
 });
+//     FB.getLoginStatus(function(response) {
+//   if (response.status === 'connected') {
+//     FB.api('/me/friends', function(response){
+//       if (response && response.data){
+//         console.log(response)
+//       } else {
+//         console.log('Something goes wrong', response);
+//       }
+//     });
+//   }
+// });
+
+    console.log(displayname)
+//     $("#logout").click(function(){
+//     		// var ref = new Firebase("https://philz4schoolz.firebaseio.com");
+// 	// ref.unauth()
+// console.log(accessToken)
+// FB.logout({access_token: accessToken})
+// })
+
+  }
+}, {scope:"user_friends"});
+
+// function logout() {
+//             FB.logout(function(response) {
+//               console.log("success")
+//             });
+//         }
 
 function yah(elem){
 	console.log(elem)
