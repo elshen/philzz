@@ -9,7 +9,33 @@
 	<link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
 </head>
 <body>
+<script>
+window.fbAsyncInit = function () {
+  FB.init({
+    appId: '1663146080571960',
+    status: true,
+    cookie: true,
+    xfbml: true
+  });
+};
 
+(function (doc) {
+  var js;
+  var id = 'facebook-jssdk';
+  var ref = doc.getElementsByTagName('script')[0];
+  if (doc.getElementById(id)) {
+    return;
+  }
+  js = doc.createElement('script');
+  js.id = id;
+  js.async = true;
+  js.src = "https://connect.facebook.net/en_US/all.js";
+  ref.parentNode.insertBefore(js, ref);
+}(document));
+</script>
+<div id="fb-root"></div>
+<div id = "display-name">
+</div>
 <div class="run-list">
 	<ul id="run-container"></ul>
 </div>
