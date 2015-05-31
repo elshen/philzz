@@ -1,14 +1,37 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>philz4kidz</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<script src="https://cdn.firebase.com/js/client/2.2.5/firebase.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 	<script src="run.js"></script>
 	<link rel="stylesheet" type="text/css" href="run.css">
 	<link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+	#add-run-form {
+					line-height:30px;
+					padding:0px;
+					width:200px;
+					}
+	#selectLoc {
+		width:200px;
+	}
+	#selectTime {
+		width:200px;
+	}
+	</style>
 </head>
 <body>
+
+<div class="jumbotron"; style="font-family:Helvetica">
+	<h1>philz4schoolz</h1>
+	<p><font size="3"><em>a webapp for school-wide collaborative philz runs (to help you make friends)</em></font></p>
+</div>
+
 <script>
 window.fbAsyncInit = function () {
   FB.init({
@@ -34,24 +57,27 @@ window.fbAsyncInit = function () {
 }(document));
 </script>
 <div id="fb-root"></div>
-<button type="button"  id="logout">Log out</button>
+<div class="container" style="font-family:Helvetica">
 <div id = "display-name">
 </div>
 <div class="run-list">
 	<ul id="run-container"></ul>
 </div>
 <div id="add-run">
-	<form id="add-run-form">
-		<input type="text" class="form-input" id="run-owner" placeholder="name">
+	<form class="form-inline" role="form" id="add-run-form">
+		<div class="form-group">
+		<input type="text" class="form-control input-sm" id="run-owner" placeholder="name">
 		<select id="selectTime">
 			<option selected="selected" id="run-time" disabled = "disabled">when are you going?</option>
 		</select>
-		<input type="text" class="form-input" id="max-orders" placeholder="how many orders can you get?">
+		<input type="text" class="form-control input-sm" id="max-orders" placeholder="how many orders can you get?">
 		<select id="selectLoc">
 			<option selected="selected" disabled="disabled" id="run-location">philz location</option>
 		</select>
-		<button type="button" class="form-input" id="create-run">submittt</button>
+		<button type="button" class = "btn btn-default btn-xs" class="form-input" id="create-run">submittt</button>
+	</div>
  	</form>
+</div>
 </div>
 </div>
 <script>
