@@ -14,7 +14,7 @@ $(document).ready(function(event){
 
 	function displayInfo(uid){
 		uid = uid;
-		base = new Firebase("https://philz4schoolz.firebaseio.com/users/" +uid)
+		base = new Firebase("https://philz4schoolz.firebaseio.com/users/" + uid)
 		displayRuns();
 	}
 	
@@ -78,6 +78,18 @@ $(document).ready(function(event){
 	};
 });
 
+	var uid = null;
+	var base = null;
+		var ref = new Firebase("https://philz4schoolz.firebaseio.com");
+		ref.authWithOAuthPopup("facebook", function(error, authData) {
+  if (error) {
+    console.log("Login Failed!", error);
+  } else {
+    console.log("Authenticated successfully with payload:", authData);
+    uid = authData.uid
+  }
+});
+
 function yah(elem){
 	console.log(elem)
 	//var firebaseID = $(elem).find('.firebase-id').text();
@@ -86,7 +98,7 @@ function yah(elem){
 	console.log(firebaseID);
 	var newOrder = $(elem).find('.drink-order').val();
 	var newPerson = $(elem).find('.person-name ').val();
-	var base = new Firebase("https://philz4schoolz.firebaseio.com/runs/" + firebaseID + "/ppl")
+	var base = new Firebase("https://philz4schoolz.firebaseio.com/users/" + uid + "/runs/" + firebaseID + "/ppl")
 	console.log(base)
 	base.push({personname:newPerson, personorder: newOrder}, function(error){
 		if(error !== null){
