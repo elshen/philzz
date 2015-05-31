@@ -48,7 +48,6 @@ ref.onAuth(authDataCallback);
 	// });
 	$("#create-run").click(function(event){
 		console.log("clicked!")
-		event.preventDefault();
 		var runLocation = $("#run-location").val();
 		var runOwner= $("#run-owner").val();
 		var runTime = $("#run-time").val();
@@ -68,7 +67,7 @@ ref.onAuth(authDataCallback);
 		});
 	});
 $("#logout").click(function(){
-console.log("meh")
+	console.log("meh")
       	 //    FB.getLoginStatus(function(response) {
         // if (response && response.status === 'connected') {
             FB.logout(function(response) {
@@ -76,7 +75,7 @@ console.log("meh")
                 document.location.reload();
             // });
         }
-    });
+    );
     })
 	function displayProfile(){
 		console.log(displayname)
