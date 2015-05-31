@@ -23,6 +23,15 @@
 	#selectTime {
 		width:200px;
 	}
+	#run-time {
+		margin-top:5px;
+	}
+	#run-location {
+		margin-top:5px;
+	}
+	#max-orders {
+		margin-top: 5px;
+	}
 	</style>
 </head>
 <body>
@@ -69,13 +78,9 @@ window.fbAsyncInit = function () {
 	<form class="form-inline" role="form" id="add-run-form">
 		<div class="form-group">
 		<input type="text" class="form-control input-sm" id="run-owner" placeholder="name">
-		<select id="selectTime">
-			<option id="run-time" disabled = "disabled" onclick="run-time = getSelectedValue()">when are you going?</option>
-		</select>
+		<input type="text" class="form-control input-sm" id="run-time" placeholder="when are you going?">
 		<input type="text" class="form-control input-sm" id="max-orders" placeholder="how many orders can you get?">
-		<select id="selectLoc">
-			<option disabled="disabled" id="run-location" onclick="getSelectedValue()">philz location</option>
-		</select>
+		<input type="text" class="form-control input-sm" id="run-location" placeholder="philz location">
 		<button type="button" class = "btn btn-default btn-xs" class="form-input" id="create-run">submittt</button>
 	</div>
  	</form>
