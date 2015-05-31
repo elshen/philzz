@@ -5,6 +5,9 @@ ref.authWithOAuthPopup("facebook", function(error, authData) {
     console.log("Login Failed!", error);
   } else {
     console.log("Authenticated successfully with payload:", authData);
+    uid = authData.uid
+    console.log(uid)
+    window.location.href="main.html"
   }
 });
 })

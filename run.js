@@ -1,7 +1,24 @@
 $(document).ready(function(event){
-	console.log("yo")
-	var base = new Firebase("https://philz4schoolz.firebaseio.com/")
-	displayRuns()
+	var uid = null;
+	var base = null;
+		var ref = new Firebase("https://philz4schoolz.firebaseio.com");
+		ref.authWithOAuthPopup("facebook", function(error, authData) {
+  if (error) {
+    console.log("Login Failed!", error);
+  } else {
+    console.log("Authenticated successfully with payload:", authData);
+    uid = authData.uid
+    displayInfo(uid)
+  }
+});
+
+	function displayInfo(uid){
+		uid = uid;
+		base = new Firebase("https://philz4schoolz.firebaseio.com/users/" +uid)
+		displayRuns();
+	}
+	
+	
 	// base.once('value' function(snap){
 	// 	var 
 	// });
@@ -27,6 +44,8 @@ $(document).ready(function(event){
 		});
 	});
 	function displayRuns(){
+		console.log(uid)
+	
 		runBase = base.child("runs");
 		runBase.on('child_added', function(snapshot) {
 
