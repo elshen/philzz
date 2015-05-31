@@ -16,12 +16,36 @@
 <div id="add-run">
 	<form id="add-run-form">
 		<input type="text" class="form-input" id="run-owner" placeholder="name">
-		<input type="text" class="form-input" id="run-time" placeholder="when are you going?">
+		<select id="selectTime">
+			<option selected="selected" disabled = "disabled">when are you going?</option>
+		</select>
 		<input type="text" class="form-input" id="max-orders" placeholder="how many orders can you get?">
-		<input type="text" class="form-input" id="run-location" placeholder="Philz location">
+		<select id="selectLoc">
+			<option selected="selected" disabled="disabled">philz location</option>
+		</select>
 		<button type="button" class="form-input" id="create-run">submittt</button>
  	</form>
 </div>
 </div>
+<script>
+var timeSelect = document.getElementById("selectTime");
+var timeOptions = ["6:00am", "6:15am", "6:30am", "6:45am", "7:00am"];
+for(var i = 0; i < timeOptions.length; i++) {
+    var opt = timeOptions[i];
+    var el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    timeSelect.appendChild(el);
+}
+var locSelect = document.getElementById("selectLoc");
+var locOptions = ["palo alto - middlefield", "palo alto - forest", "san jose", "facebook hq", "cupertino", "sunnyvale", "san mateo", "los gatos", "redwood city"]
+for(var i = 0; i < locOptions.length; i++) {
+    var opt = locOptions[i];
+    var el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    locSelect.appendChild(el);
+}
+</script>
 </body>
 </html>
