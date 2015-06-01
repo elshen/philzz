@@ -20,7 +20,7 @@ $(document).ready(function(event){
 function authDataCallback(authData) {
   if (authData) {
     console.log("User " + authData.uid + " is logged in with " + authData.provider);
-      
+
 
 
 //     		// var ref = new Firebase("https://philz4schoolz.firebaseio.com");
@@ -45,9 +45,9 @@ function displayInfo(uid){
 		displayProfile();
 		displayRuns();
 	}
-	
+
 	// base.once('value' function(snap){
-	// 	var 
+	// 	var
 	// });
 
 	function displayProfile(){
@@ -56,7 +56,7 @@ function displayInfo(uid){
 	}
 	function displayRuns(){
 		console.log(uid)
-	
+
 		runBase = base.child("runs");
 		runBase.on('child_added', function(snapshot) {
 
@@ -67,9 +67,9 @@ function displayInfo(uid){
 				'<div class="r-owner">Coffeerunner: ' + newRun.owner + '</div>' +
 				'<div class="r-time">Time: ' + newRun.time + '</div>' +
 				'<div class="r-ppl-container" ></div>'+
-				'<input type="text" class="person-name" class="form-input" placeholder="your name">' +
-				'<input type="text" class="drink-order" class="form-input" placeholder="your order">' +
-				'<button type="button" onclick="yah($(this).parent())">Yah!</button>'
+				'<input type="text" class="person-name" class="form-control input-sm" placeholder="your name">' +
+				'<input type="text" class="drink-order" class="form-control input-sm" placeholder="your order">' +
+				'<button type="button" class="btn btn-default btn-xs" onclick="yah($(this).parent())">Yah!</button>'
 				).appendTo(runContainer);
 			var newRunRef = runBase.child(snapshot.key());
 			var id = newRunRef.key()
@@ -100,7 +100,7 @@ function displayInfo(uid){
 		var newRunRef = runBase.push({location: runLocation, maxorders: maxOrders, owner: runOwner, time: runTime, ppl:""}, function(error){
 			if (error !== null) {
             	alert('Unable to push to Firebase');
-      		} 
+      		}
       		else {
       			console.log("success");
       			$(".form-input").val("");
